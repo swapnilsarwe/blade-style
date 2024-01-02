@@ -2,7 +2,9 @@
 
 namespace BladeStyle\Engines;
 
-use Facade\Ignition\Views\Engines\CompilerEngine;
+use Illuminate\View\Engines\CompilerEngine;
+
+// use Facade\Ignition\Views\Engines\CompilerEngine;
 
 class StyleViewCompilerEngine extends CompilerEngine
 {
