@@ -63,9 +63,7 @@ class ServiceProvider extends LaravelServiceProvider
      */
     protected function registerMinifier()
     {
-        $this->app->singleton('style.minifier.mullie', function ($app) {
-            return new MullieMinifier();
-        });
+        $this->app->singleton('style.minifier.mullie', fn($app) => new MullieMinifier());
     }
 
     /**
@@ -75,9 +73,7 @@ class ServiceProvider extends LaravelServiceProvider
      */
     protected function registerMinifierEngine()
     {
-        $this->app->singleton('style.engine.minifier', function ($app) {
-            return new MinifierEngine($app['style.minifier.mullie']);
-        });
+        $this->app->singleton('style.engine.minifier', fn($app) => new MinifierEngine($app['style.minifier.mullie']));
     }
 
     /**
@@ -124,13 +120,11 @@ class ServiceProvider extends LaravelServiceProvider
     protected function registerCompiler()
     {
         foreach (config('style.compiler') as $compiler => $abstracts) {
-            $this->app->singleton($compiler, function () use ($compiler) {
-                return new $compiler(
-                    $this->app['style.engine.minifier'],
-                    $this->app['files'],
-                    $this->app['config']['style.compiled'],
-                );
-            });
+            $this->app->singleton($compiler, fn() => new $compiler(
+                $this->app['style.engine.minifier'],
+                $this->app['files'],
+                $this->app['config']['style.compiled'],
+            ));
         }
     }
 
@@ -144,9 +138,7 @@ class ServiceProvider extends LaravelServiceProvider
      */
     protected function registerCompilerEngine($resolver, $binding, $abstract)
     {
-        $resolver->register($abstract, function () use ($binding) {
-            return new CompilerEngine($this->app[$binding]);
-        });
+        $resolver->register($abstract, fn() => new CompilerEngine($this->app[$binding]));
     }
 
     /**
@@ -156,9 +148,7 @@ class ServiceProvider extends LaravelServiceProvider
      */
     protected function registerStyleClearCommand()
     {
-        $this->app->singleton('command.style.clear', function ($app) {
-            return new StyleClearCommand($app['files']);
-        });
+        $this->app->singleton('command.style.clear', fn($app) => new StyleClearCommand($app['files']));
 
         $this->commands(['command.style.clear']);
     }
@@ -170,9 +160,7 @@ class ServiceProvider extends LaravelServiceProvider
      */
     protected function registerStyleCacheCommand()
     {
-        $this->app->singleton('command.style.cache', function ($app) {
-            return new StyleCacheCommand($app['style.factory']);
-        });
+        $this->app->singleton('command.style.cache', fn($app) => new StyleCacheCommand($app['style.factory']));
 
         $this->commands(['command.style.cache']);
     }

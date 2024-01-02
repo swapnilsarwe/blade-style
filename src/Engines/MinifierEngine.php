@@ -15,8 +15,6 @@ class MinifierEngine
 
     /**
      * Create new MinifierEngine instance.
-     *
-     * @param CssMinifier $minifier
      */
     public function __construct(CssMinifier $minifier)
     {
@@ -26,7 +24,6 @@ class MinifierEngine
     /**
      * Set minifier.
      *
-     * @param CssMinifier $minifier
      *
      * @return void
      */

@@ -34,9 +34,7 @@ class ViewServiceProvider extends ServiceProvider
             return $this->registerLivewireViewCompilerEngine($resolver);
         }
 
-        $resolver->register('blade', function () {
-            return new StyleViewCompilerEngine($this->app['blade.compiler']);
-        });
+        $resolver->register('blade', fn() => new StyleViewCompilerEngine($this->app['blade.compiler']));
     }
 
     /**
@@ -48,8 +46,6 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function registerLivewireViewCompilerEngine($resolver)
     {
-        $resolver->register('blade', function () {
-            return new StyleLivewireViewCompilerEngine($this->app['blade.compiler']);
-        });
+        $resolver->register('blade', fn() => new StyleLivewireViewCompilerEngine($this->app['blade.compiler']));
     }
 }

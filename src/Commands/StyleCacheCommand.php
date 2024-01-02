@@ -61,7 +61,6 @@ class StyleCacheCommand extends ViewCacheCommand
     /**
      * Compile the given view files.
      *
-     * @param \Illuminate\Support\Collection $views
      *
      * @return void
      */

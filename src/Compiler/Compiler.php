@@ -143,12 +143,10 @@ abstract class Compiler extends ViewCompiler implements CompilerInterface
     /**
      * Throw more readable style exception.
      *
-     * @param  Throwable $e
      * @return void
-     *
      * @throws \BladeStyle\Exceptions\StyleException
      */
-    protected function throwStyleException(Throwable $e, $path, int $line = 0)
+    protected function throwStyleException(Throwable $e, $path, int $line = 0): never
     {
         $line = $this->getLineWhereStyleStarts($this->currentPath) + $line - ($line > 0 ? 1 : 0);
 

@@ -7,13 +7,6 @@ use BladeStyle\Engines\CompilerEngine;
 class Style
 {
     /**
-     * Path where style is located.
-     *
-     * @var string
-     */
-    protected $path;
-
-    /**
      * Style engine.
      *
      * @var \BladeStyle\Engines\CompilerEngine
@@ -26,9 +19,11 @@ class Style
      * @param string                             $path
      * @param \BladeStyle\Engines\CompilerEngine $compiler
      */
-    public function __construct($path, CompilerEngine $engine)
+    public function __construct(/**
+     * Path where style is located.
+     */
+    protected $path, CompilerEngine $engine)
     {
-        $this->path = $path;
         $this->engine = $engine;
     }
 
